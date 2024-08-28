@@ -1,0 +1,30 @@
+<h1>Restaurant de {{ title }} - {{ email }}</h1>
+
+
+<div *ngIf="categories$ | async as categoriesData; else loading">
+  <app-menu-categories
+    [categories]="categoriesData"
+    (selectedEvent)="selectedCategoryId = $event"
+  ></app-menu-categories>
+
+  <ul>
+    <li *ngFor="let category of categoriesData | filterByCategoryId : selectedCategoryId">
+      <ul>
+
+
+        <li *ngFor="let recipe of category.recipes">
+          <h3>{{ recipe.title | uppercase }}</h3>
+          <p>{{ recipe.description }}</p>
+          <span>{{ recipe.price }}</span>
+          <button (click)="addToForm(recipe.uuid, recipe.price)">Add</button>
+          <button (click)="deleteToForm(recipe.uuid, recipe.price)">Delete</button>
+        </li>
+        
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<ng-template #loading>
+  <div>loading...</div>
+</ng-template>

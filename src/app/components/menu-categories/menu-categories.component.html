@@ -1,0 +1,10 @@
+<p>menu-categories works!</p>
+
+
+<ul>
+
+    <li *ngFor="let category of categories" (click)="selectedEvent.emit(category.uuid)">{{ category.title }}</li>
+    
+  </ul>
+
+  
